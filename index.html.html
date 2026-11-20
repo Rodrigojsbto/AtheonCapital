@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Atheon Capital — Gestão quantitativa, estratégias sistemáticas em Forex e derivativos globais, contas PAMM e Copy Trading.">
+    <title>ATHEON CAPITAL | Estratégia, Disciplina e Transparência</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#08090b',
+                        panel: '#0e1014',
+                        panelHover: '#14171d',
+                        line: '#232730',
+                        lineLight: '#323846',
+                        gold: {
+                            DEFAULT: '#c7a45b',
+                            light: '#d6b46b',
+                            dark: '#9e7e38',
+                            muted: 'rgba(199, 164, 91, 0.12)'
+                        },
+                        muted: '#8e95a5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: #08090b;
+            color: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF0D0 0%, #c7a45b 50%, #9e7e38 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 25px -5px rgba(199, 164, 91, 0.18);
+        }
+        .glass-header {
+            background: rgba(8, 9, 11, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .glass-card {
+            background: rgba(14, 16, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(35, 39, 48, 0.8);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #08090b; }
+        ::-webkit-scrollbar-thumb { background: #1b1f27; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c7a45b; }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+        }
+        .accordion-content.open {
+            max-height: 1200px;
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-black">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-panel border border-gold/40 text-white px-5 py-4 rounded-lg shadow-2xl flex items-center space-x-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+            <span id="toast-message" class="text-sm font-medium">Ação realizada com sucesso.</span>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-header border-b border-line/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-9 h-9 rounded border border-gold/60 bg-gold/10 flex items-center justify-center text-gold font-serif font-bold text-xl shadow-lg transition-transform group-hover:scale-105">
+                        A
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif font-bold tracking-[0.25em] text-lg text-white leading-none">
+                            ATHEON <span class="text-gold font-normal">CAPITAL</span>
+                        </span>
+                        <span class="text-[9px] tracking-[0.3em] text-muted uppercase mt-1 font-mono">Systematic Trading</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center space-x-6 text-xs font-medium tracking-wider uppercase">
+                    <a href="#institucional" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="Institucional" data-en="About Us">Institucional</a>
+                    <a href="#solucoes" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="Soluções" data-en="Solutions">Soluções</a>
+                    <a href="#resultados" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="Resultados" data-en="Performance">Resultados</a>
+                    <a href="#risco" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="Gestão de Risco" data-en="Risk Management">Gestão de Risco</a>
+                    <a href="#calculadora" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="Calculadora" data-en="Calculator">Calculadora</a>
+                    <a href="#como-investir" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="Como Investir" data-en="How to Invest">Como Investir</a>
+                    <a href="#faq" class="text-gray-300 hover:text-gold transition-colors py-1" data-pt="FAQ" data-en="FAQ">FAQ</a>
+                </nav>
+
+                <div class="hidden sm:flex items-center space-x-4">
+                    <button id="lang-btn" class="flex items-center space-x-2 px-3 py-1.5 rounded border border-line hover:border-gold/50 bg-panel text-xs font-mono text-gray-300 hover:text-white transition-all">
+                        <i data-lucide="globe" class="w-3.5 h-3.5 text-gold"></i>
+                        <span id="lang-label">PT-BR</span>
+                    </button>
+                    
+                    <a href="#contato" class="px-4 py-2 rounded border border-gold/40 text-gold hover:bg-gold hover:text-obsidian text-xs font-semibold tracking-wider uppercase transition-all duration-300" data-pt="Contato" data-en="Contact Us">
+                        Contato
+                    </a>
+                </div>
+
+                <div class="flex items-center space-x-3 lg:hidden">
+                    <button id="mobile-lang-btn" class="flex items-center space-x-1 px-2.5 py-1 rounded border border-line bg-panel text-xs font-mono text-gold">
+                        <span id="mobile-lang-label">PT</span>
+                    </button>
+                    <button id="mobile-menu-toggle" class="p-2 rounded border border-line text-gray-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian/95 border-b border-line px-6 pt-4 pb-8 space-y-3 text-sm uppercase tracking-wider font-medium">
+            <a href="#institucional" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Institucional" data-en="About Us">Institucional</a>
+            <a href="#solucoes" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Soluções (Copy & PAMM)" data-en="Solutions (Copy & PAMM)">Soluções (Copy & PAMM)</a>
+            <a href="#resultados" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Resultados Auditados" data-en="Performance">Resultados Auditados</a>
+            <a href="#risco" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Gestão de Risco" data-en="Risk Management">Gestão de Risco</a>
+            <a href="#calculadora" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Calculadora" data-en="Calculator">Calculadora</a>
+            <a href="#como-investir" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Como Investir" data-en="How to Invest">Como Investir</a>
+            <a href="#faq" class="block py-2 text-gray-300 hover:text-gold border-b border-line/40" data-pt="Perguntas Frequentes" data-en="FAQ">Perguntas Frequentes</a>
+            <a href="#contato" class="block py-2 text-gold font-semibold" data-pt="Fale Conosco" data-en="Get in Touch">Fale Conosco</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <!-- 1. HERO -->
+        <section class="relative min-h-[85vh] flex items-center justify-center py-20 overflow-hidden border-b border-line/50">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center_top,_var(--tw-gradient-stops))] from-gold/10 via-obsidian/90 to-obsidian pointer-events-none"></div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/5 mb-8">
+                    <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+                    <span class="text-xs font-mono tracking-widest text-gold uppercase" data-pt="PESQUISA • ESTRATÉGIA SISTEMÁTICA • CONTROLE DE RISCO" data-en="RESEARCH • SYSTEMATIC STRATEGY • RISK CONTROL">
+                        PESQUISA • ESTRATÉGIA SISTEMÁTICA • CONTROLE DE RISCO
+                    </span>
+                </div>
+
+                <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-5xl mx-auto leading-tight" data-pt="Investimento sistemático.<br><span class='gold-gradient-text'>Decisões disciplinadas.</span>" data-en="Systematic investment.<br><span class='gold-gradient-text'>Disciplined decisions.</span>">
+                    Investimento sistemático.<br><span class="gold-gradient-text">Decisões disciplinadas.</span>
+                </h1>
+
+                <p class="mt-8 text-base sm:text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed" data-pt="A Atheon Capital desenvolve e acompanha estratégias quantitativas para o mercado financeiro global, operando Forex e derivativos com rigoroso controle de risco, estrutura PAMM e transparência total." data-en="Atheon Capital develops and monitors quantitative strategies for global financial markets, trading Forex and derivatives with strict risk control, PAMM structures, and full transparency.">
+                    A Atheon Capital desenvolve e acompanha estratégias quantitativas para o mercado financeiro global, operando Forex e derivativos com rigoroso controle de risco, estrutura PAMM e transparência total.
+                </p>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#solucoes" class="w-full sm:w-auto px-8 py-4 rounded bg-gold hover:bg-gold-light text-obsidian font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-lg shadow-gold/10 flex items-center justify-center space-x-2" data-pt="Conhecer Soluções (Copy & PAMM)" data-en="Explore Solutions (Copy & PAMM)">
+                        <span>Conhecer Soluções (Copy & PAMM)</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#resultados" class="w-full sm:w-auto px-8 py-4 rounded border border-line bg-panel/80 hover:bg-panel hover:border-gold/50 text-white font-semibold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center space-x-2" data-pt="Consultar Resultados" data-en="View Track Record">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 text-gold"></i>
+                        <span>Consultar Resultados</span>
+                    </a>
+                </div>
+
+                <div class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 p-6 rounded-xl border border-line/80 bg-panel/60 backdrop-blur-md max-w-5xl mx-auto text-left">
+                    <div class="p-4 border-r border-line/40 last:border-0">
+                        <div class="text-xs font-mono text-muted uppercase tracking-wider" data-pt="Mercados Operados" data-en="Traded Markets">Mercados Operados</div>
+                        <div class="text-lg font-serif font-bold text-white mt-1" data-pt="Forex & Derivativos" data-en="Forex & Derivatives">Forex & Derivativos</div>
+                    </div>
+                    <div class="p-4 border-r border-line/40 last:border-0">
+                        <div class="text-xs font-mono text-muted uppercase tracking-wider" data-pt="Modalidades" data-en="Modalities">Modalidades</div>
+                        <div class="text-lg font-serif font-bold text-white mt-1">Copy & PAMM</div>
+                    </div>
+                    <div class="p-4 border-r border-line/40 last:border-0">
+                        <div class="text-xs font-mono text-muted uppercase tracking-wider" data-pt="Taxa de Performance" data-en="Performance Fee">Taxa de Performance</div>
+                        <div class="text-lg font-serif font-bold text-gold mt-1" data-pt="Marca d'Água" data-en="High-Water Mark">Marca d'Água</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs font-mono text-muted uppercase tracking-wider" data-pt="Verificação" data-en="Verification">Verificação</div>
+                        <div class="text-lg font-serif font-bold text-white mt-1 flex items-center space-x-1">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-gold"></i>
+                            <span data-pt="Auditado" data-en="Audited">Auditado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. INSTITUCIONAL -->
+        <section id="institucional" class="py-24 border-b border-line/50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="01. NOSSA FILOSOFIA" data-en="01. OUR PHILOSOPHY">01. NOSSA FILOSOFIA</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Estrutura institucional para o mercado moderno." data-en="Institutional structure for modern markets.">
+                        Estrutura institucional para o mercado moderno.
+                    </h2>
+                    <p class="mt-4 text-gray-400 font-light text-base leading-relaxed" data-pt="Operamos sem viés emocional, orientados por modelos quantitativos validados no mercado de câmbio (Forex), moedas globais, ações, CFDs, índices e commodities, mantendo um controle de risco rigoroso e sistemático." data-en="We operate without emotional bias, guided by validated quantitative models in foreign exchange (Forex), global currencies, equities, CFDs, indices, and commodities, maintaining strict systematic risk control.">
+                        Operamos sem viés emocional, orientados por modelos quantitativos validados no mercado de câmbio (Forex), moedas globais, ações, CFDs, índices e commodities, mantendo um controle de risco rigoroso e sistemático.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-xl hover:border-gold/40 transition-all duration-300 group">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-2xl font-bold text-gold">01</span>
+                            <div class="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+                                <i data-lucide="cpu" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-3" data-pt="Modelos Sistemáticos" data-en="Systematic Models">Modelos Sistemáticos</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light" data-pt="Regras claras de entrada, dimensionamento de posição e saída baseadas em análise estatística e modelos proprietários aplicados a Forex e derivativos globais." data-en="Clear entry, position sizing, and exit rules driven by statistical analysis and proprietary models applied across Forex and global derivatives.">
+                            Regras claras de entrada, dimensionamento de posição e saída baseadas em análise estatística e modelos proprietários aplicados a Forex e derivativos globais.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-xl hover:border-gold/40 transition-all duration-300 group">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-2xl font-bold text-gold">02</span>
+                            <div class="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+                                <i data-lucide="shield" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-3" data-pt="Controle de Exposição" data-en="Exposure Control">Controle de Exposição</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light" data-pt="Monitoramento contínuo de drawdown, volatilidade e alavancagem para preservar o patrimônio sob quaisquer condições de mercado." data-en="Continuous monitoring of drawdown, volatility, and leverage to preserve equity under any market condition.">
+                            Monitoramento contínuo de drawdown, volatilidade e alavancagem para preservar o patrimônio sob quaisquer condições de mercado.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-xl hover:border-gold/40 transition-all duration-300 group">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-2xl font-bold text-gold">03</span>
+                            <div class="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+                                <i data-lucide="file-check" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-3" data-pt="Resultados Verificáveis" data-en="Verifiable Performance">Resultados Verificáveis</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light" data-pt="Apresentação transparente do histórico de negociação, com acompanhamento via relatórios e conectores de verificação independente." data-en="Transparent presentation of trading track records, with reporting and independent third-party verification tools.">
+                            Apresentação transparente do histórico de negociação, com acompanhamento via relatórios e conectores de verificação independente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SOLUÇÕES (COPY & PAMM/PRIME) -->
+        <section id="solucoes" class="py-24 border-b border-line/50 bg-panel/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="02. MODALIDADES DE INVESTIMENTO" data-en="02. INVESTMENT MODALITIES">02. MODALIDADES DE INVESTIMENTO</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Soluções desenhadas para diferentes perfis." data-en="Solutions tailored for different profiles.">
+                        Soluções desenhadas para diferentes perfis.
+                    </h2>
+                    <p class="mt-4 text-gray-400 font-light text-base" data-pt="Todas as soluções contam com a mesma tecnologia de execução quantitativa e uma política de comissão transparente alinhada aos interesses do investidor." data-en="All solutions share the same quantitative execution technology and a transparent fee policy aligned with investor interests.">
+                        Todas as soluções contam com a mesma tecnologia de execução quantitativa e uma política de comissão transparente alinhada aos interesses do investidor.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <!-- ATHEON COPY -->
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 border border-line flex flex-col justify-between hover:border-gray-600 transition-all">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-line pb-6">
+                                <div>
+                                    <span class="text-xs font-mono text-gold uppercase tracking-wider" data-pt="Automação Flexível" data-en="Flexible Automation">Automação Flexível</span>
+                                    <h3 class="font-serif text-2xl font-bold text-white mt-1">ATHEON COPY</h3>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs font-mono text-muted uppercase" data-pt="Mínimo" data-en="Minimum">Mínimo</div>
+                                    <div class="text-3xl font-serif font-bold text-gold">US$ 100</div>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-gray-400 my-6 font-light leading-relaxed" data-pt="Indicado para investidores que desejam iniciar com menor aporte financeiro utilizando o sistema de cópia automática de ordens diretamente no servidor da corretora." data-en="Designed for investors starting with smaller capital using automated trade copying directly on the broker's infrastructure.">
+                                Indicado para investidores que desejam iniciar com menor aporte financeiro utilizando o sistema de cópia automática de ordens diretamente no servidor da corretora.
+                            </p>
+
+                            <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Replicação instantânea via data centers sem instalar softwares" data-en="Instant replication via datacenters with no extra software needed">Replicação instantânea via data centers sem instalar softwares</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Conexão rápida utilizando o link ou código de parceiro na corretora" data-en="Fast connection using partner code/link at the broker">Conexão rápida utilizando o link ou código de parceiro na corretora</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Autonomia completa para pausar ou cancelar a assinatura quando quiser" data-en="Full autonomy to pause or stop subscription anytime">Autonomia completa para pausar ou cancelar a assinatura quando quiser</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Execução em Forex, ações, CFDs, índices e commodities" data-en="Execution across Forex, equities, CFDs, indices & commodities">Execução em Forex, ações, CFDs, índices e commodities</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a href="#como-investir" class="w-full py-3.5 rounded border border-line bg-panel hover:bg-line text-center text-white text-xs font-semibold uppercase tracking-wider transition-all" data-pt="Ver Ativação Copy" data-en="View Copy Setup">
+                            Ver Ativação Copy
+                        </a>
+                    </div>
+
+                    <!-- ATHEON PRIME (PAMM) -->
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 border border-gold/40 flex flex-col justify-between gold-border-glow hover:border-gold transition-all relative">
+                        <div class="absolute -top-3.5 right-8 bg-gold text-obsidian text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                            Conta PAMM
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between border-b border-line pb-6">
+                                <div>
+                                    <span class="text-xs font-mono text-gold uppercase tracking-wider" data-pt="Gestão Unificada Institucional" data-en="Institutional Unified Management">Gestão Unificada Institucional</span>
+                                    <h3 class="font-serif text-2xl font-bold text-white mt-1">ATHEON PRIME</h3>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs font-mono text-muted uppercase" data-pt="Mínimo" data-en="Minimum">Mínimo</div>
+                                    <div class="text-3xl font-serif font-bold text-gold">US$ 1.000</div>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-gray-400 my-6 font-light leading-relaxed" data-pt="Para investidores com maior aporte patrimonial que buscam alocação em estrutura PAMM unificada gerida por especialista, com suporte dedicado." data-en="For investors with larger capital allocations seeking a unified PAMM structure managed by specialists with dedicated support.">
+                                Para investidores com maior aporte patrimonial que buscam alocação em estrutura PAMM unificada gerida por especialista, com suporte dedicado.
+                            </p>
+
+                            <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Estrutura de fundo PAMM com saldo unificado e gestor único" data-en="PAMM fund structure with unified balance and single manager">Estrutura de fundo PAMM com saldo unificado e gestor único</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Acompanhamento em tempo real via celular ou desktop" data-en="Real-time monitoring via mobile app or desktop">Acompanhamento em tempo real via celular ou desktop</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Processo de saque com validação técnica de margem do gestor" data-en="Withdrawal process with manager margin safety check">Processo de saque com validação técnica de margem do gestor</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-gold flex-shrink-0"></i>
+                                    <span data-pt="Atendimento corporativo prioritário e relatórios operacionais" data-en="Priority corporate support and detailed performance reports">Atendimento corporativo prioritário e relatórios operacionais</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a href="#como-investir" class="w-full py-3.5 rounded bg-gold text-obsidian hover:bg-gold-light font-bold text-xs uppercase tracking-wider text-center transition-all shadow-md" data-pt="Ver Ativação Prime / PAMM" data-en="View Prime / PAMM Setup">
+                            Ver Ativação Prime / PAMM
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TAXA DE PERFORMANCE / MARCA D'ÁGUA / HIGH-WATER MARK -->
+                <div class="glass-card p-6 sm:p-8 rounded-xl border border-line flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div class="space-y-2 max-w-3xl">
+                        <div class="flex items-center space-x-2 text-gold">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            <h4 class="font-serif font-bold text-white text-base" data-pt="Regra de Proteção: Marca d'Água (High-Water Mark)" data-en="Protection Rule: High-Water Mark">Regra de Proteção: Marca d'Água (High-Water Mark)</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Aplicamos rigorosamente a regra de <strong>Marca d'Água</strong> (termo internacional: <em>High-Water Mark</em>). A comissão de performance só é devida quando a conta atinge um novo topo histórico de valorização líquida. Caso ocorra alguma oscilação temporária de capital, nenhuma taxa é cobrada até que a perda seja totalmente recuperada." data-en="We strictly apply the <strong>High-Water Mark</strong> rule (em português: <em>Marca d'Água</em>). Performance fees are charged only when equity reaches a new historical high. If equity drops, no fee is charged until all losses are fully recovered.">
+                            Aplicamos rigorosamente a regra de <strong>Marca d'Água</strong> (termo internacional: <em>High-Water Mark</em>). A comissão de performance só é devida quando a conta atinge um novo topo histórico de valorização líquida. Caso ocorra alguma oscilação temporária de capital, nenhuma taxa é cobrada até que a perda seja totalmente recuperada.
+                        </p>
+                    </div>
+                    <div class="px-5 py-3 bg-obsidian rounded border border-gold/30 text-xs font-mono text-gold whitespace-nowrap" data-pt="Marca d'Água" data-en="High-Water Mark">
+                        Marca d'Água
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. RESULTADOS AUDITADOS -->
+        <section id="resultados" class="py-24 border-b border-line/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="03. HISTÓRICO VERIFICÁVEL" data-en="03. VERIFIABLE TRACK RECORD">03. HISTÓRICO VERIFICÁVEL</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Resultados e Transparência" data-en="Performance & Transparency">
+                            Resultados e Transparência
+                        </h2>
+                    </div>
+                    <p class="text-xs text-muted font-mono mt-4 md:mt-0 max-w-md text-right" data-pt="*Métricas baseadas em contas reais operadas com estratégias quantitativas." data-en="*Metrics based on live accounts operated via quantitative models.">
+                        *Métricas baseadas em contas reais operadas com estratégias quantitativas.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <span class="text-xs font-mono text-muted uppercase block" data-pt="Rentabilidade Acumulada" data-en="Cumulative Return">Rentabilidade Acumulada</span>
+                        <span class="text-3xl font-mono font-bold text-gold mt-2 block">+48.2%</span>
+                        <span class="text-[10px] text-gray-400 font-mono mt-1 block" data-pt="Histórico Real Auditado" data-en="Audited Real History">Histórico Real Auditado</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <span class="text-xs font-mono text-muted uppercase block" data-pt="Drawdown Máximo" data-en="Max Drawdown">Drawdown Máximo</span>
+                        <span class="text-3xl font-mono font-bold text-red-400 mt-2 block">-8.4%</span>
+                        <span class="text-[10px] text-gray-400 font-mono mt-1 block" data-pt="Controle Estatístico" data-en="Statistical Control">Controle Estatístico</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <span class="text-xs font-mono text-muted uppercase block" data-pt="Taxa de Acerto" data-en="Win Rate">Taxa de Acerto</span>
+                        <span class="text-3xl font-mono font-bold text-white mt-2 block">64.5%</span>
+                        <span class="text-[10px] text-gray-400 font-mono mt-1 block" data-pt="Amostra: 840+ Ordens" data-en="Sample: 840+ Trades">Amostra: 840+ Ordens</span>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <span class="text-xs font-mono text-muted uppercase block" data-pt="Fator de Lucro" data-en="Profit Factor">Fator de Lucro</span>
+                        <span class="text-3xl font-mono font-bold text-gold mt-2 block">1.82</span>
+                        <span class="text-[10px] text-gray-400 font-mono mt-1 block" data-pt="Ganhos vs. Perdas" data-en="Wins vs. Losses">Ganhos vs. Perdas</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 glass-card rounded-xl p-8 border border-line flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-line pb-4 mb-6">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+                                    <h3 class="font-serif font-bold text-white text-lg" data-pt="Auditoria Externa (Myfxbook)" data-en="External Audit (Myfxbook)">Auditoria Externa (Myfxbook)</h3>
+                                </div>
+                                <span class="text-xs font-mono bg-line text-gold px-3 py-1 rounded">Live Sync</span>
+                            </div>
+                            <p class="text-sm text-gray-400 font-light mb-6" data-pt="Conectores de auditoria independente verificando a evolução patrimonial e estatísticas operacionais em tempo real." data-en="Independent audit connectors verifying real-time account performance and execution statistics.">
+                                Conectores de auditoria independente verificando a evolução patrimonial e estatísticas operacionais em tempo real.
+                            </p>
+                        </div>
+
+                        <div class="w-full h-44 bg-obsidian border border-dashed border-line rounded-lg flex flex-col items-center justify-center p-6 text-center">
+                            <i data-lucide="bar-chart-2" class="w-8 h-8 text-gold/60 mb-2"></i>
+                            <span class="text-sm font-mono text-gray-300" data-pt="[ Integration Widget — Myfxbook]" data-en="[ Integration Widget — Myfxbook]">[ Integration Widget — Myfxbook]</span>
+                            <span class="text-xs text-muted mt-1 font-light" data-pt="Dados de histórico verificados de forma independente" data-en="Independently verified track record data">Dados de histórico verificados de forma independente</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-8 border border-line">
+                        <h3 class="font-serif font-bold text-white text-lg mb-4 flex items-center space-x-2">
+                            <i data-lucide="download" class="w-5 h-5 text-gold"></i>
+                            <span data-pt="Relatórios em PDF" data-en="PDF Reports">Relatórios em PDF</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 font-light mb-6" data-pt="Consulte demonstrativos periódicos contendo rentabilidade mensal e notas de execução." data-en="Download periodic statements detailing monthly returns and execution notes.">
+                            Consulte demonstrativos periódicos contendo rentabilidade mensal e notas de execução.
+                        </p>
+
+                        <div class="space-y-3">
+                            <div class="p-3.5 rounded bg-obsidian border border-line flex items-center justify-between hover:border-gold/40 transition-all cursor-pointer group" onclick="triggerDownload('Relatorio_Atheon_Outubro.pdf')">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="file-text" class="w-4 h-4 text-gold group-hover:scale-110 transition-transform"></i>
+                                    <div>
+                                        <div class="text-xs font-semibold text-white">Relatório Mensal — Outubro</div>
+                                        <div class="text-[10px] text-muted font-mono">PDF Auditado</div>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-mono text-gold">+3.8%</span>
+                            </div>
+
+                            <div class="p-3.5 rounded bg-obsidian border border-line flex items-center justify-between hover:border-gold/40 transition-all cursor-pointer group" onclick="triggerDownload('Relatorio_Atheon_Setembro.pdf')">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="file-text" class="w-4 h-4 text-gold group-hover:scale-110 transition-transform"></i>
+                                    <div>
+                                        <div class="text-xs font-semibold text-white">Relatório Mensal — Setembro</div>
+                                        <div class="text-[10px] text-muted font-mono">PDF Auditado</div>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-mono text-gold">+4.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GESTÃO DE RISCO -->
+        <section id="risco" class="py-24 border-b border-line/50 bg-panel/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="04. SEGURANÇA OPERACIONAL" data-en="04. OPERATIONAL SAFETY">04. SEGURANÇA OPERACIONAL</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Gestão de Risco e Preservação" data-en="Risk Management & Preservation">
+                        Gestão de Risco e Preservação
+                    </h2>
+                    <p class="mt-4 text-gray-400 font-light text-base" data-pt="Engenharia de risco focada em limitar perdas máximas e garantir a estabilidade do capital alocado." data-en="Risk engineering designed to limit drawdowns and ensure long-term stability of allocated capital.">
+                        Engenharia de risco focada em limitar perdas máximas e garantir a estabilidade do capital alocado.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <div class="flex items-center space-x-3 text-gold mb-3">
+                            <i data-lucide="sliders" class="w-5 h-5"></i>
+                            <h4 class="font-serif font-bold text-white text-base" data-pt="Dimensionamento de Lote" data-en="Position Sizing">Dimensionamento de Lote</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Cálculo dinâmico da exposição de acordo com a margem disponível, evitando alavancagem desmedida." data-en="Dynamic exposure calculation according to available margin, preventing excessive leverage.">
+                            Cálculo dinâmico da exposição de acordo com a margem disponível, evitando alavancagem desmedida.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <div class="flex items-center space-x-3 text-gold mb-3">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                            <h4 class="font-serif font-bold text-white text-base" data-pt="Proteção de Drawdown" data-en="Drawdown Circuit Breaker">Proteção de Drawdown</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Travas de segurança pré-programadas para encerrar operações caso oscilações atinjam o limite aceitável." data-en="Pre-programmed circuit breakers to halt strategies if market moves reach strict drawdown thresholds.">
+                            Travas de segurança pré-programadas para encerrar operações caso oscilações atinjam o limite aceitável.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl border border-line">
+                        <div class="flex items-center space-x-3 text-gold mb-3">
+                            <i data-lucide="lock" class="w-5 h-5"></i>
+                            <h4 class="font-serif font-bold text-white text-base" data-pt="Validação de Saques no PAMM" data-en="PAMM Withdrawal Margin Check">Validação de Saques no PAMM</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Conferência de margem ("OK" técnico) pelo gestor antes de saques na conta PAMM para garantir que posições abertas continuem protegidas." data-en="Technical margin verification ("OK" signoff) by the manager prior to PAMM withdrawals to keep open positions fully secured.">
+                            Conferência de margem ("OK" técnico) pelo gestor antes de saques na conta PAMM para garantir que posições abertas continuem protegidas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CALCULADORA DE INVESTIMENTO -->
+        <section id="calculadora" class="py-24 border-b border-line/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="05. SIMULAÇÃO MATEMÁTICA" data-en="05. MATHEMATICAL SIMULATION">05. SIMULAÇÃO MATEMÁTICA</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Calculadora de Investimento" data-en="Investment Calculator">
+                        Calculadora de Investimento
+                    </h2>
+                    <p class="mt-4 text-gray-400 font-light text-base" data-pt="Simule o efeito dos juros compostos sobre o patrimônio aplicando uma taxa mensal hipotética constante." data-en="Simulate compounding equity growth using a hypothetical constant monthly rate.">
+                        Simule o efeito dos juros compostos sobre o patrimônio aplicando uma taxa mensal hipotética constante.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-lg bg-gold/10 border border-gold/30 mb-10 flex items-start space-x-3 max-w-4xl mx-auto">
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-gold flex-shrink-0 mt-0.5"></i>
+                    <p class="text-xs text-gold/90 font-light leading-relaxed" data-pt="<strong>AVISO LEGAL:</strong> Esta é uma simulação estritamente matemática baseada em taxas hipotéticas. Não constitui promessa, garantia ou previsão de rentabilidade real. Operações em renda variável podem gerar perdas." data-en="<strong>DISCLOSURE:</strong> This is a purely mathematical simulation using hypothetical rates. It does not constitute a guarantee, promise, or projection of real returns. Variable income involves market risk.">
+                        <strong>AVISO LEGAL:</strong> Esta é uma simulação estritamente matemática baseada em taxas hipotéticas. Não constitui promessa, garantia ou previsão de rentabilidade real. Operações em renda variável podem gerar perdas.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 glass-card p-8 rounded-xl border border-line space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-mono text-muted uppercase" data-pt="Capital Inicial ($)" data-en="Initial Capital ($)">Capital Inicial ($)</label>
+                                <span id="calc-capital-val" class="font-mono text-gold font-bold">$1,000</span>
+                            </div>
+                            <input type="range" id="calc-capital" min="100" max="50000" step="100" value="1000" class="w-full accent-gold bg-line h-2 rounded cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-mono text-muted uppercase" data-pt="Taxa Mensal Hipotética (%)" data-en="Hypothetical Monthly Rate (%)">Taxa Mensal Hipotética (%)</label>
+                                <span id="calc-rate-val" class="font-mono text-gold font-bold">2.5%</span>
+                            </div>
+                            <input type="range" id="calc-rate" min="0.5" max="10.0" step="0.1" value="2.5" class="w-full accent-gold bg-line h-2 rounded cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-mono text-muted uppercase" data-pt="Prazo (Meses)" data-en="Horizon (Months)">Prazo (Meses)</label>
+                                <span id="calc-months-val" class="font-mono text-gold font-bold">12 Meses</span>
+                            </div>
+                            <input type="range" id="calc-months" min="1" max="60" step="1" value="12" class="w-full accent-gold bg-line h-2 rounded cursor-pointer">
+                        </div>
+
+                        <div class="pt-6 border-t border-line grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="text-[10px] font-mono text-muted uppercase block" data-pt="Patrimônio Final Estimado" data-en="Ending Equity Estimate">Patrimônio Final Estimado</span>
+                                <span id="calc-total" class="text-2xl font-mono font-bold text-white mt-1 block">$1,344.89</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-mono text-muted uppercase block" data-pt="Ganho Nominal" data-en="Nominal Gain">Ganho Nominal</span>
+                                <span id="calc-profit" class="text-2xl font-mono font-bold text-gold mt-1 block">+$344.89</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-xl border border-line flex flex-col justify-between h-full min-h-[380px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono text-muted uppercase" data-pt="Curva do Crescimento Matemático" data-en="Compounding Equity Curve">Curva do Crescimento Matemático</span>
+                            <span class="text-xs font-mono text-gold" id="calc-growth-percent">+34.5% Total</span>
+                        </div>
+                        <div class="relative w-full flex-1 min-h-[260px]">
+                            <canvas id="growthCanvas" class="w-full h-full"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. COMO INVESTIR -->
+        <section id="como-investir" class="py-24 border-b border-line/50 bg-panel/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="06. JORNADA DO INVESTIDOR" data-en="06. INVESTOR JOURNEY">06. JORNADA DO INVESTIDOR</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Passo a Passo para Começar" data-en="Step-by-Step Guide to Start">
+                        Passo a Passo para Começar
+                    </h2>
+                    <p class="mt-4 text-gray-400 font-light text-base" data-pt="Processo simples e seguro. Seu capital fica sempre sob sua titularidade direta na corretora." data-en="Simple and secure onboarding. Your capital remains under your direct title at the broker.">
+                        Processo simples e seguro. Seu capital fica sempre sob sua titularidade direta na corretora.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card p-6 rounded-xl border border-line flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-mono text-gold font-bold">PASSO 01</span>
+                            <h4 class="font-serif font-bold text-white text-lg mt-2 mb-3" data-pt="Cadastro na Corretora" data-en="Broker Registration">Cadastro na Corretora</h4>
+                            <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Abra sua conta na corretora credenciada utilizando o código ou link oficial de parceiro/afiliado da Atheon Capital." data-en="Open an account with our partnered broker using Atheon Capital's official partner code/link.">
+                                Abra sua conta na corretora credenciada utilizando o código ou link oficial de parceiro/afiliado da Atheon Capital.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl border border-line flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-mono text-gold font-bold">PASSO 02</span>
+                            <h4 class="font-serif font-bold text-white text-lg mt-2 mb-3" data-pt="Depósito em Sua Conta" data-en="Direct Deposit">Depósito em Sua Conta</h4>
+                            <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Realize o depósito diretamente no seu painel da corretora através dos métodos de pagamento disponíveis." data-en="Deposit funds directly inside your personal broker dashboard using your preferred payment method.">
+                                Realize o depósito diretamente no seu painel da corretora através dos métodos de pagamento disponíveis.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl border border-line flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-mono text-gold font-bold">PASSO 03</span>
+                            <h4 class="font-serif font-bold text-white text-lg mt-2 mb-3" data-pt="Conexão da Conta" data-en="Account Linking">Conexão da Conta</h4>
+                            <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Escolha entre assinar o <strong>Atheon Copy (a partir de US$ 100)</strong> ou alocar na <strong>Conta PAMM Prime (a partir de US$ 1.000)</strong>." data-en="Choose between subscribing to <strong>Atheon Copy (from $100)</strong> or allocating into the <strong>PAMM Prime Account (from $1,000)</strong>.">
+                                Escolha entre assinar o <strong>Atheon Copy (a partir de US$ 100)</strong> ou alocar na <strong>Conta PAMM Prime (a partir de US$ 1.000)</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl border border-line flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-mono text-gold font-bold">PASSO 04</span>
+                            <h4 class="font-serif font-bold text-white text-lg mt-2 mb-3" data-pt="Acompanhamento & Saques" data-en="Tracking & Withdrawals">Acompanhamento & Saques</h4>
+                            <p class="text-xs text-gray-400 font-light leading-relaxed" data-pt="Acompanhe o desempenho no aplicativo ou desktop. Solicite saques a qualquer momento direto na corretora (no PAMM, o gestor valida a margem antes da liberação)." data-en="Track results on mobile or desktop. Request withdrawals directly at the broker anytime (in PAMM, the manager verifies margin prior to release).">
+                                Acompanhe o desempenho no aplicativo ou desktop. Solicite saques a qualquer momento direto na corretora (no PAMM, o gestor valida a margem antes da liberação).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ INTERATIVO -->
+        <section id="faq" class="py-24 border-b border-line/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="07. ESCLARECIMENTOS" data-en="07. FREQUENTLY ASKED QUESTIONS">07. ESCLARECIMENTOS</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-3" data-pt="Perguntas Frequentes" data-en="Frequently Asked Questions">
+                        Perguntas Frequentes
+                    </h2>
+                </div>
+
+                <div class="space-y-4" id="faq-accordion">
+                    <!-- Gerado Dinamicamente pelo JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CONTATO INSTITUCIONAL -->
+        <section id="contato" class="py-24 border-b border-line/50 bg-panel/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="text-xs font-mono uppercase tracking-[0.2em] text-gold" data-pt="08. ATENDIMENTO" data-en="08. CONTACT">08. ATENDIMENTO</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white" data-pt="Fale com a Atheon Capital" data-en="Connect with Atheon Capital">
+                            Fale com a Atheon Capital
+                        </h2>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed" data-pt="Preencha o formulário institucional para tirar dúvidas sobre a estrutura de Copy Trading, Conta PAMM ou suporte operacional." data-en="Fill out the corporate contact form to clarify questions regarding Copy Trading, PAMM accounts, or operational support.">
+                            Preencha o formulário institucional para tirar dúvidas sobre a estrutura de Copy Trading, Conta PAMM ou suporte operacional.
+                        </p>
+
+                        <div class="p-5 rounded-lg bg-panel border border-line space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="mail" class="w-5 h-5 text-gold"></i>
+                                <div>
+                                    <span class="text-[10px] font-mono text-muted uppercase block">E-mail Institucional</span>
+                                    <span class="text-sm font-mono text-white">contato@atheoncapital.com.br</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-lg bg-red-500/10 border border-red-500/20 flex items-start space-x-3">
+                            <i data-lucide="shield-alert" class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"></i>
+                            <p class="text-[11px] text-red-200 font-light leading-relaxed" data-pt="<strong>Aviso de Segurança:</strong> A Atheon Capital jamais solicita transferências para contas bancárias corporativas ou senhas pessoais. Os aportes são feitos unicamente na corretora." data-en="<strong>Security Notice:</strong> Atheon Capital never asks for direct bank transfers to third-party accounts or personal passwords. Deposits are made solely inside your broker account.">
+                                <strong>Aviso de Segurança:</strong> A Atheon Capital jamais solicita transferências para contas bancárias corporativas ou senhas pessoais. Os aportes são feitos unicamente na corretora.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 glass-card p-8 rounded-2xl border border-line">
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-mono text-muted uppercase mb-2" data-pt="Nome Completo *" data-en="Full Name *">Nome Completo *</label>
+                                <input type="text" required placeholder="Seu nome" class="w-full px-4 py-3 rounded bg-obsidian border border-line text-white text-sm focus:border-gold focus:outline-none transition-all">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-mono text-muted uppercase mb-2" data-pt="E-mail *" data-en="Email *">E-mail *</label>
+                                    <input type="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded bg-obsidian border border-line text-white text-sm focus:border-gold focus:outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono text-muted uppercase mb-2" data-pt="Telefone / WhatsApp" data-en="Phone / WhatsApp">Telefone / WhatsApp</label>
+                                    <input type="tel" placeholder="+55 (11) 99999-9999" class="w-full px-4 py-3 rounded bg-obsidian border border-line text-white text-sm focus:border-gold focus:outline-none transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-muted uppercase mb-2" data-pt="Modalidade de Interesse" data-en="Modalities of Interest">Modalidade de Interesse</label>
+                                <select class="w-full px-4 py-3 rounded bg-obsidian border border-line text-white text-sm focus:border-gold focus:outline-none transition-all">
+                                    <option value="copy">ATHEON COPY (mínimo US$ 100)</option>
+                                    <option value="prime">ATHEON PRIME / PAMM (mínimo US$ 1.000)</option>
+                                    <option value="institutional">Atendimento Institucional Geral</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-muted uppercase mb-2" data-pt="Mensagem" data-en="Message">Mensagem</label>
+                                <textarea rows="4" placeholder="Como podemos ajudar?" class="w-full px-4 py-3 rounded bg-obsidian border border-line text-white text-sm focus:border-gold focus:outline-none transition-all"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded bg-gold hover:bg-gold-light text-obsidian font-bold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center space-x-2">
+                                <span data-pt="Enviar Mensagem" data-en="Send Message">Enviar Mensagem</span>
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-obsidian border-t border-line/80 py-16 text-gray-400 font-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-line pb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded border border-gold/60 bg-gold/10 flex items-center justify-center text-gold font-serif font-bold text-lg">
+                        A
+                    </div>
+                    <span class="font-serif font-bold tracking-[0.2em] text-white text-lg">
+                        ATHEON <span class="text-gold font-normal">CAPITAL</span>
+                    </span>
+                </div>
+                <div class="text-xs font-mono text-muted">
+                    Forex & Derivativos • Modelos Quantitativos
+                </div>
+            </div>
+
+            <div class="text-xs text-gray-500 space-y-4 leading-relaxed font-light">
+                <p data-pt="<strong>Isenção de Responsabilidade Legal:</strong> A Atheon Capital atua no desenvolvimento e gestão de modelos quantitativos para o mercado financeiro global. Este site possui caráter estritamente informativo e não constitui oferta pública de valores mobiliários, consultoria individualizada nem promessa de rentabilidade. A negociação em Forex, ações e derivativos envolve risco de perda patrimonial." data-en="<strong>Legal Disclaimer:</strong> Atheon Capital develops and manages quantitative models for global financial markets. This website is strictly informational and does not constitute a public offering or guarantee of returns. Trading Forex, equities, and derivatives involves risk of capital loss.">
+                    <strong>Isenção de Responsabilidade Legal:</strong> A Atheon Capital atua no desenvolvimento e gestão de modelos quantitativos para o mercado financeiro global. Este site possui caráter estritamente informativo e não constitui oferta pública de valores mobiliários, consultoria individualizada nem promessa de rentabilidade. A negociação em Forex, ações e derivativos envolve risco de perda patrimonial.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-muted pt-4 border-t border-line/40 gap-4">
+                <div>
+                    © <span id="current-year">2026</span> ATHEON CAPITAL. Todos os direitos reservados.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gold transition-colors" data-pt="Política de Privacidade" data-en="Privacy Policy">Política de Privacidade</a>
+                    <a href="#" class="hover:text-gold transition-colors" data-pt="Termos de Uso" data-en="Terms of Service">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        lucide.createIcons();
+
+        let currentLang = 'pt';
+
+        const faqData = [
+            {
+                q_pt: "Preciso ter experiência ou operar manualmente no mercado de Forex?",
+                q_en: "Do I need experience or manual trading skills in Forex?",
+                a_pt: "Não. Tanto na assinatura Atheon Copy quanto na estrutura Atheon Prime (PAMM), as operações ocorrem de forma 100% automatizada por modelos quantitativos. Você não precisa acompanhar gráficos nem emitir ordens manualmente.",
+                a_en: "No. Both Atheon Copy and Atheon Prime (PAMM) run 100% automatically via quantitative models. You don't need to analyze charts or place manual orders."
+            },
+            {
+                q_pt: "Qual é a diferença principal entre o Atheon Copy e o Atheon Prime (PAMM)?",
+                q_en: "What is the main difference between Atheon Copy and Atheon Prime (PAMM)?",
+                a_pt: "No <strong>Atheon Copy (mínimo US$ 100)</strong>, as ordens são copiadas individualmente para sua conta e você possui autonomia imediata para desconectar. No <strong>Atheon Prime / PAMM (mínimo US$ 1.000)</strong>, os fundos ficam em um saldo unificado gerido com acompanhamento em tempo real e atendimento prioritário.",
+                a_en: "In <strong>Atheon Copy (min $100)</strong>, trades are mirrored individually to your account with instant disconnect control. In <strong>Atheon Prime / PAMM (min $1,000)</strong>, funds are allocated in a unified balance managed by a specialist with real-time tracking and priority support."
+            },
+            {
+                q_pt: "A Atheon Capital fica em posse do meu dinheiro?",
+                q_en: "Does Atheon Capital take custody of my money?",
+                a_pt: "Jamais. Todo o seu capital permanece integralmente custodiado em sua conta pessoal dentro da corretora parceira credenciada e regulada. A Atheon Capital recebe apenas a autorização técnica de gestão ou replicação.",
+                a_en: "Never. Your capital remains 100% under your title inside your account at the regulated partner broker. Atheon Capital holds only technical management or replication rights."
+            },
+            {
+                q_pt: "Por que preciso utilizar o link/código de parceiro para abrir conta?",
+                q_en: "Why must I use the partner link/code when registering?",
+                a_pt: "O código/link de parceiro integra tecnicamente sua conta da corretora ao ecossistema Atheon Capital, permitindo o direcionamento correto dos sinais algorítmicos no Copy ou a alocação no PAMM.",
+                a_en: "The partner link/code technically connects your broker account to Atheon Capital's infrastructure, allowing proper routing of signals for Copy or allocation in the PAMM structure."
+            },
+            {
+                q_pt: "Como funcionam os saques e por que há validação de margem na conta PAMM?",
+                q_en: "How do withdrawals work and why is there a margin check on PAMM accounts?",
+                a_pt: "Os saques são solicitados diretamente no painel da corretora. No modelo Copy, a liberação é imediata ao pausar. Na Conta PAMM, o gestor realiza uma verificação técnica prévia de margem para garantir que a retirada não afete a segurança das ordens operacionais abertas dos demais investidores.",
+                a_en: "Withdrawals are requested inside the broker dashboard. For Copy, release is immediate upon pausing. For PAMM, the manager performs a quick technical margin check to ensure open trades remain fully collateralized for all participants."
+            },
+            {
+                q_pt: "O que é o conceito de Marca d'Água (High-Water Mark)?",
+                q_en: "What is the High-Water Mark (Marca d'Água) concept?",
+                a_pt: "É o mecanismo mais justo de proteção ao investidor. A taxa de performance só é cobrada quando o valor da conta ultrapassa seu topo histórico anterior. Se a conta oscilar, nenhuma taxa é cobrada até que a perda seja completamente recuperada.",
+                a_en: "It is the fairest investor protection mechanism. Performance fees are charged only when equity exceeds its previous peak. If equity fluctuates down, no fee is charged until all losses are recovered."
+            }
+        ];
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            document.getElementById('lang-label').textContent = currentLang === 'pt' ? 'PT-BR' : 'EN-US';
+            document.getElementById('mobile-lang-label').textContent = currentLang === 'pt' ? 'PT' : 'EN';
+            
+            document.querySelectorAll('[data-pt]').forEach(el => {
+                const targetText = currentLang === 'pt' ? el.getAttribute('data-pt') : el.getAttribute('data-en');
+                if (targetText) el.innerHTML = targetText;
+            });
+
+            renderFAQ();
+            updateCalculator();
+        }
+
+        document.getElementById('lang-btn').addEventListener('click', toggleLanguage);
+        document.getElementById('mobile-lang-btn').addEventListener('click', toggleLanguage);
+        document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        function renderFAQ() {
+            const container = document.getElementById('faq-accordion');
+            container.innerHTML = '';
+
+            faqData.forEach((item, index) => {
+                const question = currentLang === 'pt' ? item.q_pt : item.q_en;
+                const answer = currentLang === 'pt' ? item.a_pt : item.a_en;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'glass-card rounded-xl border border-line overflow-hidden';
+                wrapper.innerHTML = `
+                    <button class="w-full p-6 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion(${index})">
+                        <span class="font-serif font-bold text-white text-base pr-4">${question}</span>
+                        <i data-lucide="chevron-down" id="faq-icon-${index}" class="w-5 h-5 text-gold transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-answer-${index}" class="accordion-content px-6">
+                        <p class="pb-6 text-xs text-gray-400 font-light leading-relaxed border-t border-line/40 pt-4">${answer}</p>
+                    </div>
+                `;
+                container.appendChild(wrapper);
+            });
+            lucide.createIcons();
+        }
+
+        function toggleAccordion(index) {
+            const content = document.getElementById(`faq-answer-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            const isOpen = content.classList.contains('open');
+            
+            document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('[id^="faq-icon-"]').forEach(el => el.style.transform = 'rotate(0deg)');
+
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        const capitalInput = document.getElementById('calc-capital');
+        const rateInput = document.getElementById('calc-rate');
+        const monthsInput = document.getElementById('calc-months');
+
+        const capitalVal = document.getElementById('calc-capital-val');
+        const rateVal = document.getElementById('calc-rate-val');
+        const monthsVal = document.getElementById('calc-months-val');
+
+        const totalVal = document.getElementById('calc-total');
+        const profitVal = document.getElementById('calc-profit');
+        const growthPercent = document.getElementById('calc-growth-percent');
+
+        function updateCalculator() {
+            const P = parseFloat(capitalInput.value);
+            const r = parseFloat(rateInput.value) / 100;
+            const t = parseInt(monthsInput.value);
+
+            capitalVal.textContent = `$${P.toLocaleString()}`;
+            rateVal.textContent = `${rateInput.value}%`;
+            monthsVal.textContent = `${t} ${currentLang === 'pt' ? 'Meses' : 'Months'}`;
+
+            const dataPoints = [P];
+            let currentEquity = P;
+
+            for (let i = 1; i <= t; i++) {
+                currentEquity = currentEquity * (1 + r);
+                dataPoints.push(currentEquity);
+            }
+
+            const finalEquity = dataPoints[dataPoints.length - 1];
+            const netProfit = finalEquity - P;
+            const percentage = ((netProfit / P) * 100).toFixed(1);
+
+            totalVal.textContent = `$${finalEquity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            profitVal.textContent = `+$${netProfit.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            growthPercent.textContent = `+${percentage}% ${currentLang === 'pt' ? 'Crescimento' : 'Growth'}`;
+
+            drawCanvasChart(dataPoints);
+        }
+
+        [capitalInput, rateInput, monthsInput].forEach(inp => inp.addEventListener('input', updateCalculator));
+
+        function drawCanvasChart(data) {
+            const canvas = document.getElementById('growthCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            const width = rect.width;
+            const height = rect.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const padding = 30;
+            const graphWidth = width - padding * 2;
+            const graphHeight = height - padding * 2;
+
+            const minVal = Math.min(...data) * 0.95;
+            const maxVal = Math.max(...data) * 1.05;
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, 'rgba(199, 164, 91, 0.3)');
+            gradient.addColorStop(1, 'rgba(199, 164, 91, 0.0)');
+
+            ctx.beginPath();
+            data.forEach((val, idx) => {
+                const x = padding + (idx / (data.length - 1)) * graphWidth;
+                const y = height - padding - ((val - minVal) / (maxVal - minVal)) * graphHeight;
+
+                if (idx === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+
+            ctx.strokeStyle = '#c7a45b';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            ctx.lineTo(padding + graphWidth, height - padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerDownload(filename) {
+            showToast(`${currentLang === 'pt' ? 'Iniciando download de:' : 'Downloading:'} ${filename}`);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast(currentLang === 'pt' ? 'Mensagem enviada com sucesso!' : 'Message sent successfully!');
+            e.target.reset();
+        }
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        window.onload = function() {
+            renderFAQ();
+            updateCalculator();
+            window.addEventListener('resize', updateCalculator);
+        };
+    </script>
+</body>
+</html>
