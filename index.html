@@ -1011,5 +1011,20 @@
             window.addEventListener('resize', updateCalculator);
         };
     </script>
+<script type="text/javascript" src="[https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js](https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js)"></script>
+<script type="text/javascript">
+  (function(){
+    emailjs.init("mRhv9YQCNvzcFCiTO");
+  })();
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    emailjs.sendForm('service_b4hsrcp', 'template_md5j7py', this)
+      .then(function() {
+        alert('Mensagem enviada!');
+      }, function(error) {
+        alert('Erro ao enviar.');
+      });
+  });
+</script>
 </body>
 </html>
