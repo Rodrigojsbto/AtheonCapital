@@ -29,10 +29,10 @@
                         line: '#232730',
                         lineLight: '#323846',
                         gold: {
-                            DEFAULT: '#c7a45b',
-                            light: '#d6b46b',
-                            dark: '#9e7e38',
-                            muted: 'rgba(199, 164, 91, 0.12)'
+                            DEFAULT: '#D6B46B',
+                            light: '#E8C77E',
+                            dark: '#B38B3F',
+                            muted: 'rgba(214, 180, 107, 0.15)'
                         },
                         muted: '#8e95a5',
                     },
@@ -55,20 +55,20 @@
             overflow-x: hidden;
         }
         .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF0D0 0%, #c7a45b 50%, #9e7e38 100%);
+            background: linear-gradient(135deg, #FFF2D6 0%, #D6B46B 50%, #B38B3F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .gold-border-glow {
-            box-shadow: 0 0 25px -5px rgba(199, 164, 91, 0.18);
+            box-shadow: 0 0 28px -5px rgba(214, 180, 107, 0.22);
         }
         .glass-header {
             background: rgba(8, 9, 11, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
         }
-        .brand-mark { width: 42px; height: 42px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(199,164,91,.45); }
-        .footer-mark { width: 38px; height: 38px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(199,164,91,.35); }
+        .brand-mark { width: 42px; height: 42px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(214,180,107,.55); }
+        .footer-mark { width: 38px; height: 38px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(214,180,107,.42); }
         .hero-brand { width: clamp(150px, 19vw, 220px); height: auto; display: block; margin: 0 auto 1.5rem; border-radius: 10px; mix-blend-mode: screen; }
         .glass-card {
             background: rgba(14, 16, 20, 0.85);
@@ -78,7 +78,7 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #08090b; }
         ::-webkit-scrollbar-thumb { background: #1b1f27; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #c7a45b; }
+        ::-webkit-scrollbar-thumb:hover { background: #D6B46B; }
         
         .accordion-content {
             max-height: 0;
@@ -436,9 +436,9 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 glass-card rounded-xl p-8 border border-line flex flex-col justify-between">
+                    <div class="lg:col-span-2 glass-card rounded-xl p-6 sm:p-8 border border-line flex flex-col min-h-[470px]">
                         <div>
-                            <div class="flex items-center justify-between border-b border-line pb-4 mb-6">
+                            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4 mb-6">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
                                     <h3 class="font-serif font-bold text-white text-lg" data-pt="Auditoria Externa (Myfxbook / FX Blue)" data-en="External Audit (Myfxbook / FX Blue)">Auditoria Externa (Myfxbook / FX Blue)</h3>
@@ -450,10 +450,20 @@
                             </p>
                         </div>
 
-                        <div class="w-full h-44 bg-obsidian border border-dashed border-line rounded-lg flex flex-col items-center justify-center p-6 text-center">
-                            <i data-lucide="bar-chart-2" class="w-8 h-8 text-gold/60 mb-2"></i>
-                            <span class="text-sm font-mono text-gray-300" data-pt="[ <a href="https://www.myfxbook.com/members/Atheon_Capital/copytrade-roboforex/12319337"><img alt="widget" src="https://widget.mfbcdn.net/widget/widget.png?accountOid=12319337&type=6"/></a> — Myfxbook / FX Blue ]" data-en="[ Integration Widget — Myfxbook / FX Blue ]">[ Integration Widget — Myfxbook / FX Blue ]</span>
-                            <span class="text-xs text-muted mt-1 font-light" data-pt="Dados de histórico verificados de forma independente" data-en="Independently verified track record data">Dados de histórico verificados de forma independente</span>
+                        <div class="w-full min-h-[300px] bg-[#050608] border border-gold/20 rounded-lg flex flex-col items-center justify-center px-4 py-7 sm:px-6 text-center overflow-hidden">
+                            <div class="w-full flex items-center justify-center">
+                                <a href="https://www.myfxbook.com/members/Atheon_Capital/copytrade-roboforex/12319337" target="_blank" rel="noopener noreferrer" class="inline-flex max-w-full justify-center" aria-label="Abrir auditoria da conta Atheon Capital no Myfxbook">
+                                    <img
+                                        src="https://widget.mfbcdn.net/widget/widget.png?accountOid=12319337&type=6"
+                                        alt="Estatísticas e gráfico da conta Atheon Capital no Myfxbook"
+                                        class="block h-auto max-w-full rounded-sm"
+                                        loading="lazy"
+                                    >
+                                </a>
+                            </div>
+                            <span class="text-xs text-muted mt-5 font-light leading-relaxed" data-pt="Dados do histórico verificados de forma independente · Clique no gráfico para abrir a conta" data-en="Independently verified track record · Click the chart to open the account">
+                                Dados do histórico verificados de forma independente · Clique no gráfico para abrir a conta
+                            </span>
                         </div>
                     </div>
 
